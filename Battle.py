@@ -12,7 +12,7 @@ button_a.switch_to_input(pull=digitalio.Pull.DOWN)
 # pixels.fill((0, 0, 0))
 
 ## the timer for the game starts
-timeStart = time.time() #the timer for the game starts
+'''timeStart = time.time() #the timer for the game starts
 #the game starts for the player's attack
 while True:
     #the charge up phase, if button a is pressed too early, no damage will be dealt to the enemy
@@ -38,7 +38,7 @@ if time.time()-timeStart == 7:
 elif time.time()-timeStart == 8:
     print("Nice! Reduced damage dealt.")
 elif time.time()-timeStart < 7:
-    print("Oh NO?!?!?!?!?! No damage dealt")
+    print("Oh NO?!?!?!?!?! No damage dealt")'''
 class BattleHandler:
     def __init__(self, player, enemy, Pixels):
         self.Pixels = Pixels
@@ -46,6 +46,5 @@ class BattleHandler:
         self.enemy = enemy
     def startBattle(self):
         self.Pixels.fill((100, 100, 100))
-        while True:
-            time.sleep(1)
-            print("worked")
+        self.Pixels.show()
+        time.sleep(1)
