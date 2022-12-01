@@ -1,7 +1,14 @@
-from adafruit_circuitplayground import cp
+import board
+import digitalio
+import neopixel
 import time
 
-cp.pixels.brightness = .2
+button_a = digitalio.DigitalInOut(board.BUTTON_A)
+button_a.switch_to_input(pull=digitalio.Pull.DOWN)
+
+pixels = neopixel.NeoPixel(board.NEOPIXEL, 10, auto_write=False)
+
+pixels.brightness = .2
 
 playerstats = {'level': 1, 'hp': 100, 'atk': 25, 'exp': 0}
 levelexpthresholds = {1: 100, 2: 225, 3: 350, 4: 475, 5: 600, 6: 725, 7: 850, 8: 975}
@@ -10,9 +17,12 @@ monsterstats = {'name': 'placeholder', 'hp': 100, 'atk': 25, 'exp_drop': 25}
 def combat(php):
     global monsterstats
     global playerstats
+    global pixels
+    global button_a
 
     monster_hp = monsterstats['hp']
     turn = 0
+
     while True:
 
         #YOUR TURN
@@ -27,15 +37,17 @@ def combat(php):
             timeStart = time.time()
 
             while True:
-                if ((time.time()-timeStart) > 0) and ((time.time()-timeStart) < 6):
-                    cp.pixels.fill((100, 0, 0))
-                elif((time.time()-timeStart) > 9):
+                while((time.time()-timeStart) > 0) and ((time.time()-timeStart) < 6):
+                    pixels.fill((100, 0, 0))
+                    pixels.show()
+                if((time.time()-timeStart) > 9):
                     print("\nYou missed!!!")
                     break
                 elif((time.time()-timeStart) > 6):
-                    cp.pixels.fill((0, 0, 0))
-                    cp.pixels[2] = (0, 100, 0)
-                if((cp.button_a)):
+                    pixels.fill((0, 0, 0))
+                    pixels[2] = (0, 100, 0)
+                    pixels.show()
+                if((button_a.value)):
                     break
 
             #CHECK HIT LEVEL
@@ -87,6 +99,5 @@ combat(playerstats['hp'])
 print('\nCombat is over')
 print(f'You have {playerstats['hp']} HP after that battle')
 print(f'You have {playerstats['exp']} EXP')
-
 
 
