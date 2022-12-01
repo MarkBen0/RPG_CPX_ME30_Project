@@ -1,23 +1,34 @@
-from adafruit_circuitplayground import cp
+import board
+import digitalio
+#import neopixel
 import time
 
-cp.pixels.brightness = .2
+#pixels = neopixel.NeoPixel(board.NEOPIXEL, 10, auto_write=False)
+
+button_a = digitalio.DigitalInOut(board.BUTTON_A)
+button_a.switch_to_input(pull=digitalio.Pull.DOWN)
+
+# pixels.brightness = .2
+# pixels.fill((0, 0, 0))
+
 ## the timer for the game starts
 timeStart = time.time() #the timer for the game starts
 #the game starts for the player's attack
 while True:
     #the charge up phase, if button a is pressed too early, no damage will be dealt to the enemy
     if ((time.time()-timeStart) > 0) and ((time.time()-timeStart) < 6):
-        cp.pixels.fill((100, 0, 0))
+        pass
+        #cp.pixels.fill((100, 0, 0))
     #if the player doesn't press the button, no damage will be dealt to the enemy
     elif((time.time()-timeStart) > 9):
         print("Miss, no damage dealt")
         break
     #the attack is ready to be released when the light turns green
     elif((time.time()-timeStart) > 6):
-        cp.pixels.fill((0, 0, 0))
-        cp.pixels[2] = (0, 100, 0)
-    if((cp.button_a)):
+        #pixels.fill((0, 0, 0))
+        pass
+        #pixels[2] = (0, 100, 0)
+    if((button_a)):
         break
 
 
@@ -28,3 +39,13 @@ elif time.time()-timeStart == 8:
     print("Nice! Reduced damage dealt.")
 elif time.time()-timeStart < 7:
     print("Oh NO?!?!?!?!?! No damage dealt")
+class BattleHandler:
+    def __init__(self, player, enemy, Pixels):
+        self.Pixels = Pixels
+        self.player = player
+        self.enemy = enemy
+    def startBattle(self):
+        self.Pixels.fill((100, 100, 100))
+        while True:
+            time.sleep(1)
+            print("worked")

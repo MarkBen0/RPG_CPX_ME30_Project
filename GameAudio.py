@@ -32,10 +32,14 @@ sounds = [#"HinaCC0_011_Fallen_leaves_comp(2).wav",
 # play_sound(sounds[0])
 
 class Audio:
-    def play_sound(filename):
-        data = open(pathA + filename, "rb")
-        wave = audiocore.WaveFile(data)
-        a.play(wave)
+    '''Creates Audio Object'''
+    def __init__(self, muted = False):
+        self.muted = muted
+    def play_sound(self, filename):
+        if not self.muted:
+            data = open(pathA + filename, "rb")
+            wave = audiocore.WaveFile(data)
+            a.play(wave)
 
-    def isPlaying():
+    def isPlaying(self):
         return a.playing

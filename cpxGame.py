@@ -1,5 +1,6 @@
 #from adafruit_circuitplayground import cp
 from RPG_CPX_ME30_Project import objects
+from RPG_CPX_ME30_Project import Battle
 import board
 import digitalio
 import neopixel
@@ -38,6 +39,9 @@ shadeLim = .05
 # sensitivity = 1.2
 # speed = 1.2
 hero = objects.Player([2.5, 2.5], player_scale = .75, sensitivity = 1.2, speed = 1.2, land = world)
+enemy = objects.Enemy
+B = Battle.BattleHandler(hero, enemy, pixels)
+hero.battleObject(B)
 # while True:
 #     x, y, z = cp.acceleration
 #     print((y, ))
@@ -74,11 +78,11 @@ while True:
         hero.move(deltaTime)
     x, y, z = accelerometer.acceleration
     if(y >= 3):
-        hero.facing -= hero.sensitivity*deltaTime#*abs(y/3)
+        hero.turn("Right", deltaTime)
         print(hero.pos)
         print(hero.facing*(180/math.pi))
     if(y <= -3):
-        hero.facing += hero.sensitivity*deltaTime#*abs(y/3)
+        hero.turn("Left", deltaTime)
         print(hero.pos)
         print(hero.facing*(180/math.pi))
     endF = time.monotonic_ns()
