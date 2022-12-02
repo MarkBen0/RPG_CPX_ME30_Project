@@ -27,7 +27,7 @@ world = (((2.5, 2.5),#room 0 spawn
         #room 0
         [[1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 2, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 1],
         [1, 0, 3, 3, 3, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
@@ -64,7 +64,7 @@ tiles = {0: (0, 255, 0), 1: (10, 130, 220), 2: (255, 0, 0), 3: (0, 0, 0)}
 
 #Hreo and Battle objects
 hero = objects.Player(world, player_scale = .75, sensitivity = 1.2, speed = 1.2)
-B = Battle.BattleHandler(pixels, hero.roomNum, None)
+B = Battle.BattleHandler(pixels, hero.roomNum)
 hero.battleObject(B)
 
 #Main game loop
@@ -82,6 +82,12 @@ while True:
         print(hero.facing*(180/math.pi))
     if(y <= -3):
         hero.turn("Left")
+        #print(hero.pos)
+        #print(hero.facing*(180/math.pi))
         print(hero.pos)
         print(hero.facing*(180/math.pi))
+#     endF = time.monotonic_ns()
+#     FPS = (1/((endF-startF)/(10**9)))
+    ##print(FPS)
+#     deltaTime = 1/FPS
 
