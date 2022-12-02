@@ -30,7 +30,7 @@ world = {0 :
         [[1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 3, 0, 0, 1],
+        [1, 0, 3, 3, 3, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1]]),
@@ -182,12 +182,12 @@ while True:
     x, y, z = accelerometer.acceleration
     if(y >= 3):
         hero.turn("Right")
-        #print(hero.pos)
-        #print(hero.facing*(180/math.pi))
+        print(hero.pos)
+        print(hero.facing*(180/math.pi))
     if(y <= -3):
         hero.turn("Left")
-        #print(hero.pos)
-        #print(hero.facing*(180/math.pi))
+        print(hero.pos)
+        print(hero.facing*(180/math.pi))
 #     endF = time.monotonic_ns()
 #     FPS = (1/((endF-startF)/(10**9)))
     ##print(FPS)
