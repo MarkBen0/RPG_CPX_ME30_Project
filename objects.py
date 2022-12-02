@@ -2,11 +2,11 @@ import math
 import time
 from RPG_CPX_ME30_Project import GameAudio
 
-p = GameAudio.Audio(True)
+p = GameAudio.Audio()
 
 class Player:
     '''Creates and handles the player'''
-    def __init__(self, world, player_scale, sensitivity, speed, facing = 0, LightScale = 2.5, shadeLim = .05):
+    def __init__(self, world, player_scale, sensitivity, speed, facing = 0):
         self.world = world
         self.pos = world[0][0]
         self.room = world[0][1]
@@ -15,8 +15,6 @@ class Player:
         self.sensitivity = sensitivity
         self.speed = speed
         self.foot = True
-        self.LightScale = LightScale
-        self.shadeLim = shadeLim
         self.roomNum = 0
         self.deltaTime = 1
 
@@ -37,9 +35,10 @@ class Player:
         if self.room[int(self.pos[0])][int(self.pos[1])] == 3:
             self.roomNum += 1
             print(f"Next floor. Floor {self.roomNum}")
+            p.play_sound("TravelV2.wav")
+            time.sleep(.5)
             self.pos = self.world[self.roomNum][0]
             self.room = self.world[self.roomNum][1]
-            time.sleep(2)
         if(not p.isPlaying()) and (not hitWall):
             if self.foot:
                 p.play_sound("Step1.wav")
@@ -65,30 +64,21 @@ class Player:
     def display(self, tiles, pixels):
         startF = time.monotonic_ns()
         dist = []
-        tint = []
         for i in range(12):
-            tint.append(((math.sin((math.cos(((math.pi*i)/6)+self.facing)*self.player_scale+self.pos[0])*self.LightScale)+math.cos((math.sin(((math.pi*i)/6)+self.facing)*self.player_scale+self.pos[1])*self.LightScale))/4)+.5)
             try:
                 dist.append(self.room[int(math.cos(((math.pi*i)/6)+self.facing)*self.player_scale+self.pos[0])][int(math.sin(((math.pi*i)/6)+self.facing)*self.player_scale+self.pos[1])])
             except IndexError:
                 dist.append(1)
         for i in range(5):
-            shade = tint[i+1]
-            if shade < self.shadeLim:
-                shade =self.shadeLim
-            pixels[i] = (tiles[dist[i+1]][0]*shade, tiles[dist[i+1]][1]*shade, tiles[dist[i+1]][2]*shade)
+            pixels[i] = (tiles[dist[i+1]][0], tiles[dist[i+1]][1], tiles[dist[i+1]][2])
         for i in range(5, 10):
-            shade = tint[i+2]
-            if shade < self.shadeLim:
-                shade = self.shadeLim
-            pixels[i] = (tiles[dist[i+2]][0]*shade, tiles[dist[i+2]][1]*shade, tiles[dist[i+2]][2]*shade)
+            pixels[i] = (tiles[dist[i+2]][0], tiles[dist[i+2]][1], tiles[dist[i+2]][2])
         pixels.show()
         if 2 in dist:
             p.play_sound_rand("mnstr1.wav", "mnstr4.wav")
         #return room[p[0]][p[1]]
         endF = time.monotonic_ns()
         self.deltaTime = (endF-startF)/(10**9)
-        return (dist, tint)
     def battleObject(self, Bobject):
         self.B = Bobject
 

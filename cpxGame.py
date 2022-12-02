@@ -20,14 +20,14 @@ int1 = digitalio.DigitalInOut(board.ACCELEROMETER_INTERRUPT)
 accelerometer = adafruit_lis3dh.LIS3DH_I2C(i2c, address=0x19, int1=int1)
 accelerometer.range = adafruit_lis3dh.RANGE_8_G
 
-pixels.brightness = .1
+pixels.brightness = .05
 
 #World contains room layouts and room spawn
 world = (((2.5, 2.5),#room 0 spawn
         #room 0
         [[1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 2, 0, 0, 1],
         [1, 0, 3, 3, 3, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 1],
@@ -82,12 +82,6 @@ while True:
         print(hero.facing*(180/math.pi))
     if(y <= -3):
         hero.turn("Left")
-        #print(hero.pos)
-        #print(hero.facing*(180/math.pi))
         print(hero.pos)
         print(hero.facing*(180/math.pi))
-#     endF = time.monotonic_ns()
-#     FPS = (1/((endF-startF)/(10**9)))
-    ##print(FPS)
-#     deltaTime = 1/FPS
 
