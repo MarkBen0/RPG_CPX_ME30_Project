@@ -84,7 +84,7 @@ class Player:
             pixels[i] = (tiles[dist[i+2]][0]*shade, tiles[dist[i+2]][1]*shade, tiles[dist[i+2]][2]*shade)
         pixels.show()
         if 2 in dist:
-            p.play_sound_rand("Monster.wav")
+            p.play_sound_rand("mnstr1.wav", "mnstr4.wav")
         #return room[p[0]][p[1]]
         endF = time.monotonic_ns()
         self.deltaTime = (endF-startF)/(10**9)
