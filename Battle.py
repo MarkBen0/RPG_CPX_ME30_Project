@@ -3,6 +3,9 @@ import digitalio
 import time
 import random
 import sys
+from RPG_CPX_ME30_Project import GameAudio
+
+p = GameAudio.Audio()
 
 button_a = digitalio.DigitalInOut(board.BUTTON_A)
 button_a.switch_to_input(pull=digitalio.Pull.DOWN)
@@ -23,6 +26,7 @@ class BattleHandler:
         global levelexpthresholds
         global levelstats
         self.enemy.update(random.choice(monster_list))
+        p.play_sound('alert.wav')
         print(f'A {self.enemy['name']} stands in your way!')
 
         php = self.player['hp']
