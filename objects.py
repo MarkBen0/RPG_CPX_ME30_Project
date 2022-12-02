@@ -5,7 +5,7 @@ import math
 # import digitalio
 from RPG_CPX_ME30_Project import GameAudio
 
-p = GameAudio.Audio()
+p = GameAudio.Audio(True)
 # speaker_enable = digitalio.DigitalInOut(board.SPEAKER_ENABLE)
 # speaker_enable.switch_to_output(value=True)
 # a = audioio.AudioOut(board.SPEAKER)
@@ -17,7 +17,7 @@ p = GameAudio.Audio()
 #             "Step2.wav"]
 class Player:
     '''Creates and handles the player'''
-    def __init__(self, pos, player_scale, sensitivity, speed, land, facing = 0):
+    def __init__(self, pos, player_scale, sensitivity, speed, land, health = 3, facing = 0):
         self.pos = pos
         self.facing = facing + -(math.pi)/2
         self.player_scale = player_scale
@@ -25,6 +25,7 @@ class Player:
         self.speed = speed
         self.foot = True
         self.land = land
+        self.health = health
 
     def move(self, deltaTime):
         xDel = (math.cos(self.facing-((math.pi)/2))*self.speed)*deltaTime+self.pos[0]
