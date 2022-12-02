@@ -10,11 +10,6 @@ a = audioio.AudioOut(board.SPEAKER)
 
 pathA = "RPG_CPX_ME30_Project/audio/"
 
-sounds = [#"HinaCC0_011_Fallen_leaves_comp(2).wav",
-            "Step1.wav",
-            "Step2.wav"]
-
-
 # def play_sound(filename):
 #     with open (pathA + filename, "rb") as wave_file:
 #         wave = audiocore.WaveFile(wave_file)
