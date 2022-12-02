@@ -41,5 +41,7 @@ class Audio:
             wave = audiocore.WaveFile(data)
             a.play(wave)
 
+    def play_sound_rand(self, filename):
+        pass
     def isPlaying(self):
         return a.playing
