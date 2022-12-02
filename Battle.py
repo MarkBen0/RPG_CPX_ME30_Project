@@ -2,6 +2,7 @@ import board
 import digitalio
 import time
 import random
+import sys
 
 button_a = digitalio.DigitalInOut(board.BUTTON_A)
 button_a.switch_to_input(pull=digitalio.Pull.DOWN)
@@ -15,7 +16,7 @@ class BattleHandler:
         self.room = room
         self.pixels = pixels
         self.player = {'level': 1, 'hp': 100, 'atk': 25, 'exp': 0}
-        self.enemy = {'name': 'Goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25}
+        self.enemy = {}
     def startBattle(self):
         global monster_list
         global button_a
@@ -104,8 +105,8 @@ class BattleHandler:
                     print(('You leveled up! Your attack power and HP increased. HP fully healed.'))
                     time.sleep(4)
                 print(f'You have {self.player['hp']} HP.')
-                break
+                return 2
 
             # DEATH
             if turn == 3:
-                break
+                sys.exit()
