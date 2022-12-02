@@ -13,8 +13,10 @@ pixels.brightness = .2
 
 playerstats = {'level': 1, 'hp': 100, 'atk': 25, 'exp': 0}
 levelexpthresholds = {1: 100, 2: 225, 3: 350, 4: 475, 5: 600, 6: 725, 7: 850, 8: 975}
+levelstats = [{'level': 1, 'hp': 100, 'atk': 10},{'level': 2, 'hp': 110, 'atk': 15},{'level': 3, 'hp': 125, 'atk': 25},{'level': 4, 'hp': 140, 'atk': 30},{'level': 5, 'hp': 150, 'atk': 40},{'level': 6, 'hp': 170, 'atk': 45}]
+
 monsterstats = {'name': 'Goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25}
-monster_list = [{'name': 'Goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25},{'name': 'Skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 40},{'name': 'Slime', 'hp': 25, 'atk': 5, 'exp_drop': 10}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 100}, {'name': 'Werewolf', 'hp': 155, 'atk': 20, 'exp_drop': 150}]
+monster_list = [{'name': 'Goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25},{'name': 'Skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 40},{'name': 'Slime', 'hp': 25, 'atk': 5, 'exp_drop': 10}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 100}, {'name': 'Werewolf', 'hp': 155, 'atk': 20, 'exp_drop': 120}]
 
 def combat(php, monster):
     print(f'A {monster['name']} stands in your way!')
@@ -103,5 +105,8 @@ combat(playerstats['hp'], random.choice(monster_list))
 print('\nCombat is over')
 print(f'You have {playerstats['hp']} HP after that battle')
 print(f'You have {playerstats['exp']} EXP')
+if playerstats['exp'] >= levelexpthresholds[playerstats['level']]:
+    print('You leveled up! Your attack power and HP increased. HP fully healed.')
+    playerstats.update(levelstats[playerstats['level']])
 
 
