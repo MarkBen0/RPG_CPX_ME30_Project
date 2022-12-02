@@ -46,11 +46,11 @@ class BattleHandler:
                     while((time.time()-timeStart) > 0) and ((time.time()-timeStart) < 6):
                         self.pixels.fill((100, 0, 0))
                         self.pixels.show()
-                    if((time.time()-timeStart) > 9):
+                    if((time.time()-timeStart) > 7):
                         print("\nYou missed!!!")
                         break
                     elif((time.time()-timeStart) > 6):
-                        self.pixels.fill((0, 0, 0))
+                        self.pixels.fill((100, 0, 0))
                         self.pixels[2] = (0, 100, 0)
                         self.pixels.show()
                     if((button_a.value)):
@@ -61,8 +61,8 @@ class BattleHandler:
                     print(f"\nCritical Hit! {self.player['atk']+25} damage dealt")
                     monster_hp -= self.player['atk'] + 25
                     time.sleep(2)
-                elif time.time()-timeStart <= 9:
-                    print(f"\nNice! {self.player['atk']} damage dealt")
+                elif time.time()-timeStart <= 7:
+                    print(f"\nEarly! {self.player['atk']} damage dealt")
                     monster_hp -= self.player['atk']
                     time.sleep(2)
                 else:
@@ -82,7 +82,7 @@ class BattleHandler:
 
             # MONSTER'S TURN
             while turn == 1:
-                print('\nIt is the monsters turn')
+                print(f'\nIt is the {self.enemy['name']} turn')
                 time.sleep(1)
                 php -= self.enemy['atk']
                 print(f'\nThe monster deals {self.enemy["atk"]} damage to you')
