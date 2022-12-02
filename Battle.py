@@ -12,7 +12,7 @@ button_a.switch_to_input(pull=digitalio.Pull.DOWN)
 
 levelexpthresholds = {1: 100, 2: 225, 3: 350,}
 levelstats = [{'level': 1, 'hp': 100, 'atk': 10},{'level': 2, 'hp': 110, 'atk': 15},{'level': 3, 'hp': 125, 'atk': 25}]
-monster_list = [{'name': 'Goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25},{'name': 'Skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 40},{'name': 'Slime', 'hp': 25, 'atk': 5, 'exp_drop': 10}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 100}, {'name': 'Werewolf', 'hp': 155, 'atk': 20, 'exp_drop': 120}]
+monster_list = [{'name': 'goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25},{'name': 'skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 40},{'name': 'slime', 'hp': 25, 'atk': 5, 'exp_drop': 10}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 100}, {'name': 'werewolf', 'hp': 155, 'atk': 20, 'exp_drop': 120}]
 
 class BattleHandler:
     def __init__(self, pixels, room):
@@ -51,7 +51,6 @@ class BattleHandler:
                         self.pixels.fill((100, 0, 0))
                         self.pixels.show()
                     if((time.time()-timeStart) > 7):
-                        print("\nYou missed!!!")
                         break
                     elif((time.time()-timeStart) > 6):
                         self.pixels.fill((100, 0, 0))
@@ -62,6 +61,7 @@ class BattleHandler:
 
                 #CHECK HIT LEVEL
                 if time.time()-timeStart == 7:
+                    p.play_sound('hit.wav')
                     print(f"\nCritical Hit! {self.player['atk']+25} damage dealt")
                     monster_hp -= self.player['atk'] + 25
                     time.sleep(2)
@@ -70,11 +70,11 @@ class BattleHandler:
                     monster_hp -= self.player['atk']
                     time.sleep(2)
                 else:
-                    print("\nOh NO?!?!?!?!?! No damage dealt")
+                    print("\nYou missed!! No damage dealt")
 
                 #CHECK FOR VICTORY
                 if monster_hp > 0:
-                    print(f'The monster has {monster_hp} HP')
+                    print(f'The enemy has {monster_hp} HP')
                     print(f'You have {php} HP')
                     time.sleep(3)
                     turn = 1
@@ -86,11 +86,11 @@ class BattleHandler:
 
             # MONSTER'S TURN
             while turn == 1:
-                print(f'\nIt is the {self.enemy['name']} turn')
+                print(f'\nIt is the {self.enemy['name']}\'s turn')
                 time.sleep(1)
                 php -= self.enemy['atk']
-                print(f'\nThe monster deals {self.enemy["atk"]} damage to you')
-                print(f'\nThe monster has {monster_hp} HP')
+                print(f'\nThe enemy deals {self.enemy["atk"]} damage to you')
+                print(f'\nThe enemy has {monster_hp} HP')
                 print(f'You have {php} HP')
                 time.sleep(3.5)
                 turn = 0
