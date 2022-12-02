@@ -32,15 +32,14 @@ class Player:
             hitWall = True
         self.pos = (xDel, yDel)
         if self.room[int(self.pos[0])][int(self.pos[1])] == 2:
-            print("enter Battle")
             self.B.startBattle()
             self.room[int(self.pos[0])][int(self.pos[1])] = 0
         if self.room[int(self.pos[0])][int(self.pos[1])] == 3:
-            print("Next floor")
             self.roomNum += 1
-            print(self.roomNum)
+            print(f"Next floor. Floor {self.roomNum}")
             self.pos = self.world[self.roomNum][0]
             self.room = self.world[self.roomNum][1]
+            time.sleep(2)
         if(not p.isPlaying()) and (not hitWall):
             if self.foot:
                 p.play_sound("Step1.wav")

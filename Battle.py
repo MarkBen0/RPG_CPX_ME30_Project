@@ -57,11 +57,11 @@ class BattleHandler:
 
                 #CHECK HIT LEVEL
                 if time.time()-timeStart == 7:
-                    print(f"\nCritical Hit! {self.player['atk']} damage dealt")
+                    print(f"\nCritical Hit! {self.player['atk']+25} damage dealt")
                     monster_hp -= self.player['atk'] + 25
                     time.sleep(2)
                 elif time.time()-timeStart <= 9:
-                    print("\nNice! Damage dealt")
+                    print(f"\nNice! {self.player['atk']} damage dealt")
                     monster_hp -= self.player['atk']
                     time.sleep(2)
                 else:
@@ -74,7 +74,7 @@ class BattleHandler:
                     time.sleep(3)
                     turn = 1
                 else:
-                    print('you won!')
+                    print('\nYou won!')
                     time.sleep(1)
                     turn = 2
                     break
