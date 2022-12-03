@@ -5,7 +5,7 @@ import random
 import sys
 from RPG_CPX_ME30_Project import GameAudio
 
-p = GameAudio.Audio()
+p = GameAudio.Audio(True)
 
 button_a = digitalio.DigitalInOut(board.BUTTON_A)
 button_a.switch_to_input(pull=digitalio.Pull.DOWN)
@@ -99,7 +99,7 @@ class BattleHandler:
             if turn == 2:
                 global updated_hp
                 updated_hp = {'hp': php}
-                updated_exp = {'exp': self.enemy['exp_drop']}
+                updated_exp = {'exp': self.enemy['exp_drop'] + self.player['exp']}
                 self.player.update(updated_hp)
                 self.player.update(updated_exp)
                 print(f'You gained {self.enemy["exp_drop"]} experience points.')
@@ -108,7 +108,7 @@ class BattleHandler:
                     self.player.update(levelstats[self.player['level']])
                     print(('You leveled up! Your attack power and HP increased. HP fully healed.'))
                     time.sleep(3)
-                print(f'You have {self.player["hp"]} HP.')
+                print(f'You have {self.player["hp"]} HP and {self.player["exp"]} experience points.')
                 time.sleep(2)
                 return
 
