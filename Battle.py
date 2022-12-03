@@ -107,9 +107,9 @@ class BattleHandler:
                 if self.player['exp'] >= levelexpthresholds[self.player['level']]:
                     self.player.update(levelstats[self.player['level']])
                     print(('You leveled up! Your attack power and HP increased. HP fully healed.'))
-                    time.sleep(4)
+                    time.sleep(3)
                 print(f'You have {self.player['hp']} HP.')
-                return 2
+                time.sleep(2)
 
             # DEATH
             if turn == 3:
