@@ -1,5 +1,4 @@
 import supervisor
-import time
 
 supervisor.disable_autoreload()
 
@@ -17,7 +16,6 @@ class game_end:
         self.pixels.show()
         while True:
             #print("Wining")
-            time.sleep(.05)
             if self.Button_A.value:
                 #time.sleep(2)
                 supervisor.reload()
@@ -26,6 +24,5 @@ class game_end:
         self.pixels.fill((255,0,0))
         self.pixels.show()
         while True:
-            time.sleep(.05)
             if self.Button_A.value:
                 supervisor.reload()
