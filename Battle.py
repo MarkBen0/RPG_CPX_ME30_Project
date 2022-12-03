@@ -27,7 +27,7 @@ class BattleHandler:
         global levelstats
         self.enemy.update(random.choice(monster_list))
         p.play_sound('alert.wav')
-        print(f'A {self.enemy['name']} stands in your way!')
+        print(f'A {self.enemy["name"]} stands in your way!')
 
         php = self.player['hp']
         monster_hp = self.enemy['hp']
@@ -86,7 +86,7 @@ class BattleHandler:
 
             # MONSTER'S TURN
             while turn == 1:
-                print(f'\nIt is the {self.enemy['name']}\'s turn')
+                print(f'\nIt is the {self.enemy["name"]}\'s turn')
                 time.sleep(1)
                 php -= self.enemy['atk']
                 print(f'\nThe enemy deals {self.enemy["atk"]} damage to you')
@@ -102,13 +102,13 @@ class BattleHandler:
                 updated_exp = {'exp': self.enemy['exp_drop']}
                 self.player.update(updated_hp)
                 self.player.update(updated_exp)
-                print(f'You gained {self.enemy['exp_drop']} experience points.')
+                print(f'You gained {self.enemy["exp_drop"]} experience points.')
                 time.sleep(2.5)
                 if self.player['exp'] >= levelexpthresholds[self.player['level']]:
                     self.player.update(levelstats[self.player['level']])
                     print(('You leveled up! Your attack power and HP increased. HP fully healed.'))
                     time.sleep(3)
-                print(f'You have {self.player['hp']} HP.')
+                print(f'You have {self.player["hp"]} HP.')
                 time.sleep(2)
                 return
 
