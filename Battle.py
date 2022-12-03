@@ -93,7 +93,7 @@ class BattleHandler:
             if turn == 2:
                 global updated_hp
                 updated_hp = {'hp': php}
-                updated_exp = {'exp': self.enemy['exp_drop']}
+                updated_exp = {'exp': self.enemy['exp_drop'] + self.player["exp"]}
                 self.player.update(updated_hp)
                 self.player.update(updated_exp)
                 print(f'You gained {self.enemy["exp_drop"]} experience points.')

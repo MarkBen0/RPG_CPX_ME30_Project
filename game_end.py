@@ -19,6 +19,7 @@ class game_end:
                 #time.sleep(2)
                 supervisor.reload()
     def losing(self):
+        self.p.play_sound("BigL.wav")
         self.pixels.fill((255,0,0))
         self.pixels.show()
         while True:
