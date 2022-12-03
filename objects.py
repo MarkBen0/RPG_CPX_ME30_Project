@@ -32,8 +32,8 @@ class Player:
             self.room[int(self.pos[0])][int(self.pos[1])] = 0
         elif self.room[int(self.pos[0])][int(self.pos[1])] == 3:
             self.roomNum += 1
-            if self.roomNum > len(self.world):
-                self.W.winning()
+            if self.roomNum + 1 > len(self.world):
+                self.W.wining()
             print(f"Next floor. Floor {self.roomNum}")
             self.p.play_sound("TravelV2.wav")
             time.sleep(.5)
