@@ -21,10 +21,13 @@ class Audio:
         self.startTime = time.monotonic()
         self.endTime = random.uniform(self.randSoundRange[0], self.randSoundRange[1])
     def play_sound(self, filename):
-        if not self.muted:
-            data = open(pathA + filename, "rb")
-            wave = audiocore.WaveFile(data)
-            a.play(wave)
+        try:
+            if not self.muted:
+                data = open(pathA + filename, "rb")
+                wave = audiocore.WaveFile(data)
+                a.play(wave)
+        except:
+            pass
     #plays sound randomly
     def play_sound_rand(self, *filename):
         if (time.monotonic() - self.startTime) > self.endTime and not a.playing:
