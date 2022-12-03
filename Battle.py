@@ -11,14 +11,14 @@ button_a = digitalio.DigitalInOut(board.BUTTON_A)
 button_a.switch_to_input(pull=digitalio.Pull.DOWN)
 
 levelexpthresholds = {1: 100, 2: 225, 3: 350,}
-levelstats = [{'level': 1, 'hp': 100, 'atk': 10},{'level': 2, 'hp': 110, 'atk': 15},{'level': 3, 'hp': 125, 'atk': 25}]
-monster_list = [{'name': 'goblin', 'hp': 50, 'atk': 10, 'exp_drop': 25},{'name': 'skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 40}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 100}, {'name': 'werewolf', 'hp': 155, 'atk': 20, 'exp_drop': 120}]
+levelstats = [{'level': 1, 'hp': 100, 'atk': 15},{'level': 2, 'hp': 125, 'atk': 25},{'level': 3, 'hp': 150, 'atk': 30}]
+monster_list = [{'name': 'goblin', 'hp': 50, 'atk': 10, 'exp_drop': 35}, {'name': 'skeleton', 'hp': 75, 'atk': 15, 'exp_drop': 45}, {'name': 'troll', 'hp': 100, 'atk': 20, 'exp_drop': 70}, {'name': 'Minotaur', 'hp': 125, 'atk': 25, 'exp_drop': 80},]
 
 class BattleHandler:
     def __init__(self, pixels, room):
         self.room = room
         self.pixels = pixels
-        self.player = {'level': 1, 'hp': 100, 'atk': 25, 'exp': 0}
+        self.player = {'level': 1, 'hp': 100, 'atk': 15, 'exp': 0}
         self.enemy = {}
     def startBattle(self):
         global monster_list
@@ -62,8 +62,8 @@ class BattleHandler:
                 #CHECK HIT LEVEL
                 if time.time()-timeStart == 7:
                     p.play_sound('hit.wav')
-                    print(f"\nCritical Hit! {self.player['atk']+25} damage dealt")
-                    monster_hp -= self.player['atk'] + 25
+                    print(f"\nCritical Hit! {self.player['atk']+20} damage dealt")
+                    monster_hp -= self.player['atk'] + 20
                     time.sleep(2)
                 elif time.time()-timeStart <= 7:
                     print(f"\nEarly! {self.player['atk']} damage dealt")
