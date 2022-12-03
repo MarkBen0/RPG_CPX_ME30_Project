@@ -2,7 +2,7 @@ import math
 import time
 from RPG_CPX_ME30_Project import GameAudio
 
-p = GameAudio.Audio(True)
+p = GameAudio.Audio()
 
 class Player:
     '''Creates and handles the player'''

@@ -5,7 +5,7 @@ import random
 import sys
 from RPG_CPX_ME30_Project import GameAudio
 
-p = GameAudio.Audio(True)
+p = GameAudio.Audio()
 
 button_a = digitalio.DigitalInOut(board.BUTTON_A)
 button_a.switch_to_input(pull=digitalio.Pull.DOWN)
@@ -108,7 +108,7 @@ class BattleHandler:
                     self.player.update(levelstats[self.player['level']])
                     print(('You leveled up! Your attack power and HP increased. HP fully healed.'))
                     time.sleep(3)
-                print(f'You have {self.player["hp"]} HP and {self.player["exp"]} experience points.')
+                print(f'You have {self.player["hp"]} HP')
                 time.sleep(2)
                 return
 
