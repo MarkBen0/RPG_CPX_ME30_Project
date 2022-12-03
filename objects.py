@@ -1,12 +1,9 @@
 import math
 import time
-from RPG_CPX_ME30_Project import GameAudio
-
-p = GameAudio.Audio()
 
 class Player:
     '''Creates and handles the player'''
-    def __init__(self, world, player_scale, sensitivity, speed, facing = 0):
+    def __init__(self, world, player_scale, sensitivity, speed, AudioObj, facing = 0):
         self.world = world
         self.pos = world[0][0]
         self.room = world[0][1]
@@ -17,6 +14,7 @@ class Player:
         self.foot = True
         self.roomNum = 0
         self.deltaTime = 1
+        self.p = AudioObj
 
     def move(self):
         xDel = (math.cos(self.facing-((math.pi)/2))*self.speed)*self.deltaTime+self.pos[0]
@@ -32,19 +30,21 @@ class Player:
         if self.room[int(self.pos[0])][int(self.pos[1])] == 2:
             self.B.startBattle()
             self.room[int(self.pos[0])][int(self.pos[1])] = 0
-        if self.room[int(self.pos[0])][int(self.pos[1])] == 3:
+        elif self.room[int(self.pos[0])][int(self.pos[1])] == 3:
             self.roomNum += 1
+            if self.roomNum > len(self.world):
+                self.W.winning()
             print(f"Next floor. Floor {self.roomNum}")
-            p.play_sound("TravelV2.wav")
+            self.p.play_sound("TravelV2.wav")
             time.sleep(.5)
             self.pos = self.world[self.roomNum][0]
             self.room = self.world[self.roomNum][1]
-        if(not p.isPlaying()) and (not hitWall):
+        if(not self.p.isPlaying()) and (not hitWall):
             if self.foot:
-                p.play_sound("Step1.wav")
+                self.p.play_sound("Step1.wav")
                 self.foot = not self.foot
             else:
-                p.play_sound("Step2.wav")
+                self.p.play_sound("Step2.wav")
                 self.foot = not self.foot
 
         print(self.pos)
@@ -75,10 +75,12 @@ class Player:
             pixels[i] = (tiles[dist[i+2]][0], tiles[dist[i+2]][1], tiles[dist[i+2]][2])
         pixels.show()
         if 2 in dist:
-            p.play_sound_rand("mnstr1.wav", "mnstr4.wav")
+            self.p.play_sound_rand("mnstr1.wav", "mnstr4.wav")
         #return room[p[0]][p[1]]
         endF = time.monotonic_ns()
         self.deltaTime = (endF-startF)/(10**9)
     def battleObject(self, Bobject):
         self.B = Bobject
+    def winObject(self, Wobject):
+        self.W = Wobject
 

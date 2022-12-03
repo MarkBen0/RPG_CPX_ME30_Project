@@ -1,39 +1,27 @@
-from RPG_CPX_ME30_Project import GameAudio
 import supervisor
 import time
-p=GameAudio.Audio()
 class game_end:
     # Write your code here :-)
-    def __init__(self,pixels,buttonA):
+    def __init__(self,pixels,buttonA,AudioObj):
         self.pixels=pixels
         self.win=False
         self.lose=False
         self.Button_A=buttonA
-    def reset(self):
-        supervisor.reload()
-    def coloring(self):
-        if self.win:
-            self.pixels.fill((255,255,255))
-            pass
-        elif self.lose:
-            self.pixels.fill((255,0,0))
-            pass
-        self.pixels.show()
+        self.p=AudioObj
     def wining(self):
-        p.play_sound("Wow.wav")
-        self.win=True
-        self.coloring()
+        self.p.play_sound("Wow.wav")
+        self.pixels.fill((255,255,255))
+        self.pixels.show()
         while True:
             #print("Wining")
-            self.pixels
             time.sleep(.5)
             if self.Button_A.value:
                 #time.sleep(2)
-                self.reset()
+                supervisor.reload()
     def losing(self):
-        self.lose=True
-        self.coloring()
+        self.pixels.fill((255,0,0))
+        self.pixels.show()
         while True:
             time.sleep(1)
             if self.Button_A.value:
-                self.reset()
+                supervisor.reload()
