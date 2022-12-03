@@ -1,5 +1,8 @@
 import supervisor
 import time
+
+supervisor.disable_autoreload()
+
 class game_end:
     # Write your code here :-)
     def __init__(self,pixels,buttonA,AudioObj):
