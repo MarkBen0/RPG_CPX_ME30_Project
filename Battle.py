@@ -31,7 +31,7 @@ class BattleHandler:
 
         php = self.player['hp']
         monster_hp = self.enemy['hp']
-        turn = 0
+        turn = 0 #Turn 0: Player's turn. Turn 1: Enemy's turn. Turn 2: Victory. Turn 3: Defeat
 
         while True:
 
